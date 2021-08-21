@@ -1,0 +1,13 @@
+com\google\cloud\driver\DriverSingleton.class
+com\google\cloud\page\CalculationResultPage.class
+com\google\cloud\page\GoogleCloudHomePage.class
+com\google\cloud\page\PlatformPricingCalculatorPage.class
+com\google\cloud\util\TestListener.class
+com\google\cloud\page\YopmailHomePage.class
+com\google\cloud\test\HardCoreTest.class
+com\google\cloud\page\SearchResultPage.class
+com\google\cloud\service\TestDataReader.class
+com\google\cloud\page\YopmailPostBoxPage.class
+com\google\cloud\test\CommonConditions.class
+com\google\cloud\service\EstimationCreator.class
+com\google\cloud\model\ComputeEngine.class
