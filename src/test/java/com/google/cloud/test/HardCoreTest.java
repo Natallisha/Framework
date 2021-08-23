@@ -15,16 +15,15 @@ public class HardCoreTest extends CommonConditions{
     public void resultValuesAreSimilarToTotalCostInMail() {
 
         ComputeEngine testEngine = EstimationCreator.withParametersFroMProperties();
-        CalculationResultPage calculationOfCost = new GoogleCloudHomePage(driver)
+        CalculationResultPage totalCalculationOfCost = new GoogleCloudHomePage(driver)
                 .openPage()
-                .searchForTerms(termForSearching)
-                .chooseTheResultWeNeed()
+                .searchModule(termForSearching)
                 .activateComputeEngineChapter()
                 .createTestEngineEstimate(testEngine);
 
-        String totalCostFromPage = calculationOfCost.getTotalCost();
+        String totalCostFromPage = totalCalculationOfCost.getTotalCost();
 
-        String totalCostFromMail = calculationOfCost.pressEmailEstimateButton()
+        String totalCostFromMail = totalCalculationOfCost.pressEmailEstimateButton()
                 .openNewTabAndSwitchToYopmail()
                 .getNewRandomMailCopyAndTurnBackToCalculating()
                 .fillEmailAndSendMail()

@@ -9,23 +9,23 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class SearchResultPage {
+public class SearchResultPage extends AbstractPage {
 
-    private WebDriver driver;
     private String searchTerm;
-    private List<WebElement> searchResultsList;
+
+    private final By resultOfSearchingLocator = By.xpath("//a[@class='gs-title']");
 
     public SearchResultPage(WebDriver driver, String searchTerm) {
-        this.driver = driver;
+        super(driver);
         this.searchTerm = searchTerm;
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(this.driver, this);
     }
 
     public PlatformPricingCalculatorPage chooseTheResultWeNeed() {
-        new WebDriverWait(driver, 100)
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions
-                        .presenceOfAllElementsLocatedBy(By.xpath("//a[@class = 'gs-title']")));
-        searchResultsList = driver.findElements(By.xpath("//a[@class='gs-title']"));
+                        .presenceOfAllElementsLocatedBy(resultOfSearchingLocator));
+        List<WebElement> searchResultsList = driver.findElements(resultOfSearchingLocator);
         for (WebElement search : searchResultsList) {
             if (search.getText().equals(searchTerm)) {
                 search.click();

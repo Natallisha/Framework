@@ -5,6 +5,7 @@ com\google\cloud\page\PlatformPricingCalculatorPage.class
 com\google\cloud\util\TestListener.class
 com\google\cloud\page\YopmailHomePage.class
 com\google\cloud\test\HardCoreTest.class
+com\google\cloud\page\AbstractPage.class
 com\google\cloud\page\SearchResultPage.class
 com\google\cloud\service\TestDataReader.class
 com\google\cloud\page\YopmailPostBoxPage.class

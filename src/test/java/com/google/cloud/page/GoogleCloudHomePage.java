@@ -18,7 +18,7 @@ public class GoogleCloudHomePage {
 
     public GoogleCloudHomePage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(this.driver, this);
     }
 
     public GoogleCloudHomePage openPage() {
@@ -36,6 +36,11 @@ public class GoogleCloudHomePage {
 
         return new SearchResultPage(driver, term);
 
+    }
+
+    public PlatformPricingCalculatorPage searchModule(String term) {
+        searchForTerms(term).chooseTheResultWeNeed();
+        return new PlatformPricingCalculatorPage(driver);
     }
 
 }
