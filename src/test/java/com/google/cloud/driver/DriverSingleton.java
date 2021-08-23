@@ -22,8 +22,6 @@ public class DriverSingleton {
                 }
                 default: {
                     WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver(new ChromeOptions().setHeadless(false));
-
                     break;
                 }
             }
