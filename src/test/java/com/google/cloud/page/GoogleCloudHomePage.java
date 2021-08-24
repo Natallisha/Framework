@@ -8,22 +8,21 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class GoogleCloudHomePage {
+public class GoogleCloudHomePage extends AbstractPage{
 
     private final static String HOME_PAGE = "https://cloud.google.com";
-    private WebDriver driver;
 
     @FindBy(xpath = "//input[@class = 'devsite-search-field devsite-search-query']")
     private WebElement searchArea;
 
     public GoogleCloudHomePage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(this.driver, this);
     }
 
     public GoogleCloudHomePage openPage() {
         driver.get(HOME_PAGE);
-        new WebDriverWait(driver, 10)
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.visibilityOf(searchArea));
         return this;
     }
