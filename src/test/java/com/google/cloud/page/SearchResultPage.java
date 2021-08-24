@@ -13,7 +13,7 @@ public class SearchResultPage extends AbstractPage {
 
     private String searchTerm;
 
-    private final By resultOfSearchingLocator = By.xpath("//a[@class='gs-title']");
+    private final By RESULT_OF_SEARCHING_LOCATOR = By.xpath("//a[@class='gs-title']");
 
     public SearchResultPage(WebDriver driver, String searchTerm) {
         super(driver);
@@ -24,8 +24,8 @@ public class SearchResultPage extends AbstractPage {
     public PlatformPricingCalculatorPage chooseTheResultWeNeed() {
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions
-                        .presenceOfAllElementsLocatedBy(resultOfSearchingLocator));
-        List<WebElement> searchResultsList = driver.findElements(resultOfSearchingLocator);
+                        .presenceOfAllElementsLocatedBy(RESULT_OF_SEARCHING_LOCATOR));
+        List<WebElement> searchResultsList = driver.findElements(RESULT_OF_SEARCHING_LOCATOR);
         for (WebElement search : searchResultsList) {
             if (search.getText().equals(searchTerm)) {
                 search.click();

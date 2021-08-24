@@ -9,15 +9,12 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.awt.AWTException;
-import java.awt.Robot;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CalculationResultPage extends AbstractPage {
-
-    private String address;
 
     @FindBy(id = "resultBlock")
     private WebElement resultBlock;
@@ -37,8 +34,8 @@ public class CalculationResultPage extends AbstractPage {
     @FindBy(xpath = "//button[@onclick = 'egengo();']")
     private WebElement generateEmailButton;
 
-    private final By resultCostLineLocator = By.xpath("//md-card-content[@id = 'resultBlock']//md-card-content/div/div/div/h2/b[@class = 'ng-binding']");
-    private final By emailFieldLocator = By.xpath("//input[@ng-model = 'emailQuote.user.email']");
+    private final By RESULT_COST_LINE_LOCATOR = By.xpath("//md-card-content[@id = 'resultBlock']//md-card-content/div/div/div/h2/b[@class = 'ng-binding']");
+    private final By EMAIL_FIELD_LOCATOR = By.xpath("//input[@ng-model = 'emailQuote.user.email']");
 
     public CalculationResultPage(WebDriver driver) {
         super(driver);
@@ -52,7 +49,7 @@ public class CalculationResultPage extends AbstractPage {
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.visibilityOf(resultBlock));
         String resultCostLine = driver
-                .findElement(resultCostLineLocator).getText();
+                .findElement(RESULT_COST_LINE_LOCATOR).getText();
 
         String[] arr = resultCostLine.split("\\s");
 
@@ -99,9 +96,8 @@ public class CalculationResultPage extends AbstractPage {
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(secondLevelIframe));
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
-                .until(ExpectedConditions.visibilityOfElementLocated(emailFieldLocator))
+                .until(ExpectedConditions.visibilityOfElementLocated(EMAIL_FIELD_LOCATOR))
                 .sendKeys(Keys.CONTROL + "v");
-        address = driver.findElement(emailFieldLocator).getText();
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(sendMailButton))
                 .click();

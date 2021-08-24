@@ -7,9 +7,9 @@ import com.google.cloud.service.EstimationCreator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class HardCoreTest extends CommonConditions{
+public class HardCoreTest extends CommonConditions {
 
-    public String termForSearching ="Google Cloud Platform Pricing Calculator";
+    private static final String TERM_FOR_SEARCHING = "Google Cloud Platform Pricing Calculator";
 
     @Test
     public void resultValuesAreSimilarToTotalCostInMail() {
@@ -17,7 +17,8 @@ public class HardCoreTest extends CommonConditions{
         ComputeEngine testEngine = EstimationCreator.withParametersFroMProperties();
         CalculationResultPage totalCalculationOfCost = new GoogleCloudHomePage(driver)
                 .openPage()
-                .searchModule(termForSearching)
+                .searchForTerms(TERM_FOR_SEARCHING)
+                .chooseTheResultWeNeed()
                 .activateComputeEngineChapter()
                 .createTestEngineEstimate(testEngine);
 

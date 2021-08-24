@@ -47,22 +47,22 @@ public class TestListener implements ITestListener {
 
     }
 
-    private void saveScreenshot(){
+    private void saveScreenshot() {
         File screenCapture = ((TakesScreenshot) DriverSingleton
                 .getDriver())
                 .getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(screenCapture, new File(
                     ".//target/screenshots/"
-                    + getCurrentTimeAsString() +
-                    ".png"));
+                            + getCurrentTimeAsString() +
+                            ".png"));
         } catch (IOException e) {
             log.error("Failed to save screenshot: " + e.getLocalizedMessage());
         }
     }
 
-    private String getCurrentTimeAsString(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "uuuu-MM-dd_HH-mm-ss" );
+    private String getCurrentTimeAsString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd_HH-mm-ss");
         return ZonedDateTime.now().format(formatter);
     }
 }

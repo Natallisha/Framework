@@ -62,9 +62,9 @@ public class PlatformPricingCalculatorPage extends AbstractPage {
     @FindBy(xpath = "//button[@aria-label = 'Add to Estimate']")
     private WebElement addToEstimateButton;
 
-    private final By computeEngineModuleLocator = By.xpath("//md-tab-item/div[@class='tab-holder compute'][@title='Compute Engine']");
-    private final By machineTypeFromDropDownList = By.xpath("//div[contains(@id, 'select_container_')][@aria-hidden = 'false']/md-select-menu/md-content/md-optgroup/md-option/div[contains(@class, 'md-text')]");
-    private final By itemFromDropDownList = By.xpath("//div[contains(@id, 'select_container_')][@aria-hidden = 'false']/md-select-menu/md-content/md-option/div[contains(@class, 'md-text')]");
+    private final By COMPUTE_ENGINE_MODULE_LOCATOR = By.xpath("//md-tab-item/div[@class='tab-holder compute'][@title='Compute Engine']");
+    private final By MACHINE_TYPE_FROM_DROP_DOWN_LIST = By.xpath("//div[contains(@id, 'select_container_')][@aria-hidden = 'false']/md-select-menu/md-content/md-optgroup/md-option/div[contains(@class, 'md-text')]");
+    private final By ITEM_FROM_DROP_DOWN_LIST = By.xpath("//div[contains(@id, 'select_container_')][@aria-hidden = 'false']/md-select-menu/md-content/md-option/div[contains(@class, 'md-text')]");
 
     public PlatformPricingCalculatorPage(WebDriver driver) {
 
@@ -73,13 +73,13 @@ public class PlatformPricingCalculatorPage extends AbstractPage {
 
     }
 
-    private PlatformPricingCalculatorPage switchToIframe() {
+    private void switchToIframe() {
 
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(firstLevelIframe));
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(secondLevelIframe));
-        return this;
+
     }
 
     public PlatformPricingCalculatorPage activateComputeEngineChapter() {
@@ -87,7 +87,7 @@ public class PlatformPricingCalculatorPage extends AbstractPage {
         switchToIframe();
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions
-                        .presenceOfElementLocated(computeEngineModuleLocator));
+                        .presenceOfElementLocated(COMPUTE_ENGINE_MODULE_LOCATOR));
         computeEngineButton.click();
 
         return this;
@@ -106,44 +106,42 @@ public class PlatformPricingCalculatorPage extends AbstractPage {
         return new CalculationResultPage(driver);
     }
 
-    public PlatformPricingCalculatorPage inputNumberOfInstance(String term) {
+    public void inputNumberOfInstance(String term) {
 
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.visibilityOf(numberOfInstanceField)).sendKeys(term);
 
-        return this;
     }
 
-    private PlatformPricingCalculatorPage getDropDownListAndSelectValue(String term) {
+    private void getDropDownListAndSelectValue(String term) {
         List<WebElement> listOfItems = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions
-                        .visibilityOfAllElementsLocatedBy(itemFromDropDownList));
+                        .visibilityOfAllElementsLocatedBy(ITEM_FROM_DROP_DOWN_LIST));
         for (WebElement item : listOfItems) {
             if (item.getText().equals(term)) {
                 item.click();
                 break;
             }
         }
-        return this;
     }
 
-    public PlatformPricingCalculatorPage selectOperationSystem(String term) {
+    public void selectOperationSystem(String term) {
 
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(operationSystemField)).click();
         getDropDownListAndSelectValue(term);
 
-        return this;
     }
 
-    public PlatformPricingCalculatorPage selectVMClass(String term) {
+    public void selectVMClass(String term) {
+
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(vmClassField)).click();
         getDropDownListAndSelectValue(term);
-        return this;
+
     }
 
-    public PlatformPricingCalculatorPage selectSeriesAndMachineType(String series, String type) {
+    public void selectSeriesAndMachineType(String series, String type) {
 
         logger.info(type);
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
@@ -154,17 +152,16 @@ public class PlatformPricingCalculatorPage extends AbstractPage {
 
         List<WebElement> listOfTypes = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions
-                        .visibilityOfAllElementsLocatedBy(machineTypeFromDropDownList));
+                        .visibilityOfAllElementsLocatedBy(MACHINE_TYPE_FROM_DROP_DOWN_LIST));
         for (WebElement item : listOfTypes) {
             if (item.getText().equals(type)) {
                 item.click();
                 break;
             }
         }
-        return this;
     }
 
-    public PlatformPricingCalculatorPage addGPUAndSetParameters(String numberOfGPUs, String gPUsType) {
+    public void addGPUAndSetParameters(String numberOfGPUs, String gPUsType) {
 
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(addGPUCheckbox))
@@ -178,45 +175,40 @@ public class PlatformPricingCalculatorPage extends AbstractPage {
                 .click();
         getDropDownListAndSelectValue(gPUsType);
 
-        return this;
     }
 
-    public PlatformPricingCalculatorPage setLocalSSD(String valueSSD) {
+    public void setLocalSSD(String valueSSD) {
 
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(valueSSDField))
                 .click();
         getDropDownListAndSelectValue(valueSSD);
 
-        return this;
     }
 
-    public PlatformPricingCalculatorPage setDataCenterLocation(String location) {
+    public void setDataCenterLocation(String location) {
 
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(dataCenterLocationField))
                 .click();
         getDropDownListAndSelectValue(location);
 
-        return this;
-
     }
 
-    public PlatformPricingCalculatorPage setCommitmentPeriod(String commitmentTerm) {
+    public void setCommitmentPeriod(String commitmentTerm) {
 
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(commitmentPeriodField))
                 .click();
         getDropDownListAndSelectValue(commitmentTerm);
 
-        return this;
     }
 
-    public CalculationResultPage pressButtonAddToEstimate() {
+    public void pressButtonAddToEstimate() {
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(addToEstimateButton))
                 .click();
-        return new CalculationResultPage(driver);
+        new CalculationResultPage(driver);
     }
 
 }

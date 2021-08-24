@@ -10,9 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.List;
 
-public class YopmailHomePage extends AbstractPage{
-
-    public String mail;
+public class YopmailHomePage extends AbstractPage {
 
     @FindBy(xpath = "//a[@href = 'email-generator']")
     private WebElement generateRandomMailButton;
@@ -29,17 +27,15 @@ public class YopmailHomePage extends AbstractPage{
         PageFactory.initElements(driver, this);
     }
 
-    public CalculationResultPage getNewRandomMailCopyAndTurnBackToCalculating(){
+    public CalculationResultPage getNewRandomMailCopyAndTurnBackToCalculating() {
 
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.visibilityOf(generateRandomMailButton));
         generateRandomMailButton.click();
-
-        mail = newRandomMail.getText();
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.visibilityOf(copyNewRandomMailButton));
         copyNewRandomMailButton.click();
-        List<String> tabs = new ArrayList<> (driver.getWindowHandles());
+        List<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(0));
 
         return new CalculationResultPage(driver);

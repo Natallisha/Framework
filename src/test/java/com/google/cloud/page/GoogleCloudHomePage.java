@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class GoogleCloudHomePage extends AbstractPage{
+public class GoogleCloudHomePage extends AbstractPage {
 
     private final static String HOME_PAGE = "https://cloud.google.com";
 
@@ -36,10 +36,4 @@ public class GoogleCloudHomePage extends AbstractPage{
         return new SearchResultPage(driver, term);
 
     }
-
-    public PlatformPricingCalculatorPage searchModule(String term) {
-        searchForTerms(term).chooseTheResultWeNeed();
-        return new PlatformPricingCalculatorPage(driver);
-    }
-
 }
